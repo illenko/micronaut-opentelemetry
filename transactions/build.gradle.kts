@@ -27,13 +27,19 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-observation-http")
     implementation("io.micronaut.tracing:micronaut-tracing-opentelemetry-http")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-otlp")
-    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.opentelemetry:opentelemetry-exporter-logging")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("org.yaml:snakeyaml")
+    runtimeOnly("org.postgresql:postgresql")
 }
 
 application {

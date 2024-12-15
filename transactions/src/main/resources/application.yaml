@@ -1,0 +1,42 @@
+micrometer:
+  observation:
+    http:
+      client:
+        enabled: true
+      server:
+        enabled: true
+
+micronaut:
+  application:
+    name: transactions
+  server:
+    port: 8080
+  http:
+    services:
+      users:
+        url: http://localhost:8081
+  metrics:
+    enabled: true
+    export:
+      otlp:
+        enabled: true
+        url: http://localhost:4318/v1/metrics
+
+otel:
+  traces:
+    exporter: otlp
+  exporter:
+    otlp:
+      endpoint: http://localhost:4317
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+
+datasources:
+  default:
+    url: 'jdbc:postgresql://localhost:5432/postgres'
+    username: 'postgres'
+    password: 'postgres'
+    driverClassName: 'org.postgresql.Driver'

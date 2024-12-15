@@ -1,10 +1,18 @@
 package com.example.model
 
+import io.micronaut.data.annotation.GeneratedValue
+import io.micronaut.data.annotation.Id
+import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.serde.annotation.Serdeable
 
+@Serdeable
+@MappedEntity
 data class Transaction(
-    val id: Long,
+    @field:Id
+    @field:GeneratedValue(GeneratedValue.Type.AUTO)
+    var id: Long? = null,
     val amount: Double,
+    val category: String,
     val description: String,
     val userId: Long,
 )
@@ -19,6 +27,15 @@ data class User(
 data class TransactionResponse(
     val id: Long,
     val amount: Double,
+    val category: String,
     val description: String,
     val user: User,
+)
+
+@Serdeable
+data class CreateTransactionRequest(
+    val amount: Double,
+    val category: String,
+    val description: String,
+    val userId: Long,
 )
