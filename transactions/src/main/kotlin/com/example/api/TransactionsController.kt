@@ -51,20 +51,34 @@ class TransactionsController(
         }
     }
 
-    @Post("/")
+    @Post("")
     fun create(
         @Body request: CreateTransactionRequest,
-    ): HttpResponse<Transaction> {
+    ): HttpResponse<TransactionResponse> {
         log.info("Creating new transaction: $request")
-        val transaction =
-            Transaction(
-                amount = request.amount,
-                category = request.category,
-                description = request.description,
-                userId = request.userId,
+        val user = usersClient.userById(request.userId)
+        return user?.let {
+            val transaction =
+                Transaction(
+                    amount = request.amount,
+                    category = request.category,
+                    description = request.description,
+                    userId = request.userId,
+                )
+            val savedTransaction = repo.save(transaction)
+            log.info("Transaction created with id: ${savedTransaction.id}")
+            HttpResponse.created(
+                TransactionResponse(
+                    id = savedTransaction.id!!,
+                    amount = savedTransaction.amount,
+                    category = savedTransaction.category,
+                    description = savedTransaction.description,
+                    user = it,
+                ),
             )
-        val savedTransaction = repo.save(transaction)
-        log.info("Transaction created with id: ${savedTransaction.id}")
-        return HttpResponse.created(savedTransaction)
+        } ?: run {
+            log.warn("User with id: ${request.userId} not found")
+            HttpResponse.badRequest()
+        }
     }
 }
