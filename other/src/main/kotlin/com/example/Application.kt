@@ -63,8 +63,8 @@ class Application(
                                 }
 
                             if (user != null && transaction != null) {
-                                println("User: $user")
-                                println("Transaction: $transaction")
+                                log.info("User: $user")
+                                log.info("Transaction: $transaction")
 
                                 if (Random.nextBoolean()) {
                                     val newTransaction =
@@ -76,7 +76,7 @@ class Application(
                                         )
                                     try {
                                         transactionsClient.createTransaction(newTransaction)
-                                        println("Created new transaction: $newTransaction")
+                                        log.info("Created new transaction: $newTransaction")
                                     } catch (e: Exception) {
                                         log.error("Error creating transaction: $newTransaction", e)
                                     }
