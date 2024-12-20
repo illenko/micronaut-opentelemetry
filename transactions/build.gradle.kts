@@ -26,6 +26,7 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-observation")
     implementation("io.micronaut.micrometer:micronaut-micrometer-observation-http")
     implementation("io.micronaut.tracing:micronaut-tracing-opentelemetry-http")
+    implementation("io.micronaut.tracing:micronaut-tracing-opentelemetry-jdbc")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-otlp")
     implementation("io.opentelemetry:opentelemetry-exporter-logging")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp")

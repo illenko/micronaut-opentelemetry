@@ -51,7 +51,7 @@ class TransactionsController(
         }
     }
 
-    @Post("")
+    @Post
     fun create(
         @Body request: CreateTransactionRequest,
     ): HttpResponse<TransactionResponse> {
